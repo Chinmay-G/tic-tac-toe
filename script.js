@@ -11,6 +11,8 @@ const cellSix = document.querySelector('#six');
 const cellSeven = document.querySelector('#seven');
 const cellEight = document.querySelector('#eight');
 
+const div = document.createElement('div');
+
 const players = {
     player1: 'Player 1',
     player2: 'Player 2',
@@ -50,10 +52,6 @@ const Game = {
 
                 Game.assign(e.target);
                 Game.checkWinner();
-                console.log(Game.go);
-                console.log(Game.board);
-
-                console.log(Game.winner);
             }
         });
     },
@@ -61,11 +59,13 @@ const Game = {
     assign: function (cello) {
         if (Game.board[Game.p] === '') {
             if (Game.go === true) {
-                cello.textContent = 'x';
+                cello.append(document.createElement('div'));
+                cello.childNodes[0].classList.add('cross');
                 cello.value = 'x';
             }
             else {
-                cello.textContent = 'o';
+                cello.append(document.createElement('div'));
+                cello.childNodes[0].classList.add('circle');
                 cello.value = 'o';
             }
 
@@ -74,13 +74,6 @@ const Game = {
         }
     }
 
-}
-
-
-console.log(Game.board.slice(0, 3).join('  '));
-console.log(Game.board.slice(3, 6).join('  '));
-console.log(Game.board.slice(6).join('  '));
-
-Game.checkWinner();
+};
 
 Game.play();
