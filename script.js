@@ -1,6 +1,11 @@
 'use strict';
+const body = document.querySelector('body');
 const container = document.querySelector('.container');
 const cell = document.querySelectorAll('.cell');
+const gameOver = document.querySelector('.gameOver');
+const message = document.querySelector('.message');
+const close = document.querySelector('.close');
+
 const cellZero = document.querySelector('#zero');
 const cellOne = document.querySelector('#one');
 const cellTwo = document.querySelector('#two');
@@ -22,6 +27,7 @@ const Game = {
     board: ['', '', '', '', '', '', '', '', ''],
     go: true,
     p: '',
+    d: 0,
     winner: false,
 
     checkWinner: function () {
@@ -34,7 +40,20 @@ const Game = {
             (Game.board[0] === Game.board[4] && Game.board[0] === Game.board[8] && Game.board[0] !== '') ||
             (Game.board[2] === Game.board[4] && Game.board[2] === Game.board[6] && Game.board[2] !== '')
         ) {
+            container.classList.add('opacity');
+            gameOver.classList.remove('hidden');
+            message.textContent = `${Game.go ? 'Player2' : 'Player1'} Wins the Game!`;
             console.log(`${Game.go ? 'Player2' : 'Player1'} Wins the Game!`);
+            Game.winner = true;
+        }
+
+        Game.d = 0;
+        Game.board.forEach(function (i) {
+            if (i !== '') Game.d++;
+        });
+
+        if (Game.d === 9 && Game.winner === false) {
+            console.log('Game Draw');
             Game.winner = true;
         }
     },
@@ -77,3 +96,8 @@ const Game = {
 };
 
 Game.play();
+
+close.addEventListener('click', function () {
+    container.classList.remove('opacity');
+    gameOver.classList.add('hidden');
+});
