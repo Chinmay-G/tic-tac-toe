@@ -228,3 +228,19 @@ hr {
     opacity: 0.3;
     filter: blur(2px);
 }
+
+@media screen and (max-width: 700px){
+    * {
+        scale: 0.9;
+    }
+
+    .heading {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    .logo {
+        width: 80px;
+    }
+    
+}
